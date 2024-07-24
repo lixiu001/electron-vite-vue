@@ -1,12 +1,19 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
 const username = ref('');
 const password = ref('');
 
 const login = async () => {
+  console.log('login');
    // 登录验证逻辑
+   // ...使用登录API等处理登录逻辑
    // 登录成功通知主进程
-   window.ipcRenderer.send('login-success'); // 
+  //  window.ipcRenderer.send('login-success'); // 
+   // 登录成功后，更改路由
+  router.push({ name: 'robotIcon' });
 };
 
 const logout = () => {
@@ -15,11 +22,6 @@ const logout = () => {
 };
 
 onMounted(async () => {
-  // const autoLoginResult = await window.electronAPI.autoLogin();
-  // if (autoLoginResult.success) {
-  //   username.value = autoLoginResult.credentials.username;
-  //   password.value = autoLoginResult.credentials.password;
-  // }
 });
 
 </script>

@@ -2,8 +2,7 @@
 </script>
 
 <template>
-  <router-view />
+  <img src="/logo.png" >
 </template>
 
-<style>
-</style>
+<style></style>

@@ -31,6 +31,11 @@ const indexHtml = path.join(RENDERER_DIST, 'index.html')
 const robotHtml = path.join(RENDERER_DIST, 'robot.html')
 
 
+if (!app.requestSingleInstanceLock()) {
+  app.quit()
+  process.exit(0)
+}
+
 async function createWindow() {
   const { width, height } = screen.getPrimaryDisplay().workAreaSize;
   win = new BrowserWindow({
@@ -39,12 +44,13 @@ async function createWindow() {
     // x: width - 500, 
     // y: height - 400, 
     title: 'Main window',
-    frame: false, // 无边框
+    // frame: false, // 无边框
     transparent: true, // 背景透明
     // alwaysOnTop: true, // 窗口始终置顶
-    resizable: false, // 不允许改变窗口大小
+    // resizable: false, // 不允许改变窗口大小
     webPreferences: {
       preload,
+      contextIsolation: true,
     },
   })
   if (VITE_DEV_SERVER_URL) {
@@ -62,6 +68,7 @@ function createTray() {
     win.isVisible() ? win.hide() : win.show();
   });
 }
+
 
 app.whenReady().then(() => {
   createWindow();
