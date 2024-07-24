@@ -1,16 +1,10 @@
 {
-  // Use IntelliSense to learn about possible attributes.
-  // Hover to view descriptions of existing attributes.
-  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "compounds": [
     {
-      "name": "Debug App",
+      "name": "Main + renderer",
       "preLaunchTask": "Before Debug",
-      "configurations": [
-        "Debug Main Process",
-        "Debug Renderer Process"
-      ],
+      "configurations": ["Debug Main Process", "Debug Renderer Process"],
       "presentation": {
         "hidden": false,
         "group": "",
@@ -24,14 +18,17 @@
       "name": "Debug Main Process",
       "type": "node",
       "request": "launch",
+      "cwd": "${workspaceFolder}",
       "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron",
       "windows": {
         "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron.cmd"
       },
-      "runtimeArgs": [
-        "--remote-debugging-port=9229",
-        "."
-      ],
+      "args": [".", "--remote-debugging-port=9222"],
+      // "runtimeArgs": [
+      //   "--remote-debugging-port=9229",
+      //   "."
+      // ],
+      "outputCapture": "std",
       "envFile": "${workspaceFolder}/.vscode/.debug.env",
       "console": "integratedTerminal"
     },
@@ -41,13 +38,13 @@
       "request": "attach",
       "type": "chrome",
       "timeout": 60000,
-      "skipFiles": [
-        "<node_internals>/**",
-        "${workspaceRoot}/node_modules/**",
-        "${workspaceRoot}/dist-electron/**",
-        // Skip files in host(VITE_DEV_SERVER_URL)
-        "http://127.0.0.1:3344/**"
-      ]
-    },
+      "webRoot": "${workspaceFolder}"
+      // "skipFiles": [
+      //   "<node_internals>/**",
+      //   "${workspaceRoot}/node_modules/**",
+      //   "${workspaceRoot}/dist-electron/**",
+      //   "http://127.0.0.1:3344/**"
+      // ]
+    }
   ]
 }
